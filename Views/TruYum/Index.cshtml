@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TruYumClientApplication.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn-success" href="@Url.Action("GetOrderDetails","TruYum")">Order Details</a>
+</p>
+<p>
+    <a class="btn btn-danger align-content-end" href="@Url.Action("Logout","Login")">Logout</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a class="btn btn-success" href="@Url.Action("PlaceOrder","TruYum",new { id = item.ItemId })">PlaceOrder</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

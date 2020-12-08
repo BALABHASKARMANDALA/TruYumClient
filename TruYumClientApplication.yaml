@@ -1,0 +1,33 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: truyumclientapplication-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: TruYumClientApplication
+  template:
+    metadata:
+      labels:
+        app: TruYumClientApplication
+    spec:
+      containers:
+      - name: truyumclientrepos
+        image: truyumappcr.azurecr.io/truyumclientrepos:latest
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: truyumappsn
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: truyumclientapplication
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: TruYumClientApplication
